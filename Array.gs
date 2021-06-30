@@ -41,7 +41,7 @@ function _array() {
       while (i < keys.length - 1 && d > keys[i]) i++;
       freqs[i]++
     })
-    return freqs
+    return freqs.map(k=>[k])
   }
 
   /**
@@ -74,10 +74,10 @@ function _array() {
     // get the slope
     const ls = linest(flatten(known_y).map(d => Math.log(d)), known_x)
 
-    return [
+    return [[
       Math.exp(ls[0]),
       Math.exp(ls[1])
-    ]
+    ]]
 
   }
   /**
@@ -95,7 +95,9 @@ function _array() {
   const sumproduct = (...args) => {
 
     // as usual just flatten everything
-    let items = Array.from(...args).map(a => flatten(a))
+     console.log(args)
+    let items = args.map(a => flatten(a))
+   console.log(items)
     const maxLength = items.reduce((p, c) => Math.max(p, c.length), -Infinity)
     console.log(items, items.map(a => a.length))
     // now blow them out to the same length if any are just 1
@@ -196,5 +198,6 @@ function _array() {
     sumproduct
   }
 }
+
 
 
