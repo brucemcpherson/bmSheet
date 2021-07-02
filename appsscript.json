@@ -1,6 +1,14 @@
 {
   "timeZone": "Europe/Paris",
-  "dependencies": {},
   "exceptionLogging": "STACKDRIVER",
-  "runtimeVersion": "V8"
+  "runtimeVersion": "V8",
+  "dependencies": {
+    "libraries": [
+      {
+        "userSymbol": "bmTemporal",
+        "libraryId": "1o_qJw1fdgF4NgRnHrsB_Jsbu3gYe1fQnPze33V9jHLqBCXHmzZaBgmGH",
+        "version": "3"
+      }
+    ]
+  }
 }
