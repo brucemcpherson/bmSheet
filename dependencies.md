@@ -1,5 +1,5 @@
 # Google Apps Script Project: bmSheet
-This repo (bmSheet) was automatically updated on 6/30/2021, 1:30:28 PM by GasGit
+This repo (bmSheet) was automatically updated on 7/2/2021, 1:08:28 PM by GasGit
 
 For more information on gasgit, see the [desktop liberation site](https://ramblings.mcpher.com/drive-sdk-and-github/migrategasgit/ "desktop liberation")
 
@@ -17,15 +17,17 @@ The shared link for [bmSheet is here](https://script.google.com/d/1B4T8Ec3Mlmqj9
 --- | --- 
 appsscript| json
 Array| server_js
-test| server_js
 Handy| server_js
 Date| server_js
 Exports| server_js
-GGDates| server_js
 ### Directly referenced libraries
-no libraries discovered
+*library*|*identifier*|*key*|*version*|*dev mode*|*source*|
+--- | --- | --- | --- | --- | --- 
+bmTemporal| bmTemporal|1o_qJw1fdgF4NgRnHrsB_Jsbu3gYe1fQnPze33V9jHLqBCXHmzZaBgmGH|3|no|[here](libraries/bmTemporal "library source")
 ### All dependencies and sub dependencies
-no libraries discovered
+*library*|*identifier*|*key*|*version*|*dev mode*|*source*|
+--- | --- | --- | --- | --- | --- 
+bmTemporal| bmTemporal|1o_qJw1fdgF4NgRnHrsB_Jsbu3gYe1fQnPze33V9jHLqBCXHmzZaBgmGH|3|no|[here](libraries/bmTemporal "library source")
 ### Enabled Google Services
 no libraries discovered
 ### Scopes required
