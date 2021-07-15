@@ -8,7 +8,7 @@ function _date() {
   // tz can be set (eg date.setTimeZone (SpreadsheetApp.getActiveSpreadsheet().getSpreadsheetTimeZone())
   let _tz = Temporal.TimeZone.from(helpers.report().libraryTimeZone)
   const settimezone = (tz) => _tz = Temporal.TimeZone.from(tz)
-  const gettimezone = (tz) => _tz
+  const gettimezone = () => _tz
 
   /**
    * convert a date from a date string where the timzezone is implicit
@@ -70,6 +70,7 @@ function _date() {
   }
 
 
+  const differ = (start_date, end_date) => start_date.until(end_date)
   /**
    * DATEDIF(start_date, end_date, unit)
     start_date - The start date to consider in the calculation. Must be a reference to a cell containing a DATE, a function returning a DATE type, or a number.
@@ -92,7 +93,7 @@ function _date() {
     'm': 'months',
     'd': 'days'
   }
-  const differ = (start_date, end_date) => start_date.until(end_date)
+ 
   const datedif = (start_date, end_date, unit) => {
     const start = fromdate(start_date)
     const end = fromdate(end_date)
@@ -247,7 +248,6 @@ function _date() {
         throw new Error('weekday type should be 1-3')
     }
 
-    return w
   }
 
   /** 
@@ -259,19 +259,18 @@ function _date() {
   */
   const isoweeknum = (date) => zonedISO(date).weekOfYear
 
+  /** TODAY
+   * Returns the current date as a date value.
+   */
+  const today = () => todate(Temporal.now.instant().toZonedDateTimeISO({ timeZone: _tz }).with({ hour: 0, minute: 0, second: 0 }))
+
+
   /**
    * 
    * DATEVALUE
    * Converts a provided date string in a known format to an (excel) date value.
    */
   const datevalue = (dateString) => dateToValue(dateString)
-
-
-  /** TODAY
-   * Returns the current date as a date value.
-   */
-  const today = () => todate(Temporal.now.instant().toZonedDateTimeISO({ timeZone: _tz }).with({ hour: 0, minute: 0, second: 0 }))
-
 
   // makes an excel type datevalue from a date
 
