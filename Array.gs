@@ -8,7 +8,7 @@ function _array() {
   /**
    * =FLATTEN(range1, [range2, ?])
    */
-  const flatten = (...args) => _handy.forceArray(args).map(f => _handy.forceArray(f).flat()).flat()
+  const flatten = (...args) => _handy.flatten(args)
 
   /**
     * ARRAY_CONSTRAIN(input_range, num_rows, num_cols)
@@ -41,7 +41,7 @@ function _array() {
       while (i < keys.length - 1 && d > keys[i]) i++;
       freqs[i]++
     })
-    return freqs.map(k=>[k])
+    return freqs.map(k => [k])
   }
 
   /**
@@ -80,6 +80,8 @@ function _array() {
     ]]
 
   }
+
+
   /**
    * TRANSPOSE(array_or_range)
    */
@@ -87,28 +89,15 @@ function _array() {
 
   /**
    * SUMPRODUCT(array1, [array2, ...])
-
     array1 - The first array or range whose entries will be multiplied with corresponding entries in the second such array or range.
     array2, ... - [ OPTIONAL - {1,1,1,...} with same length as array1 by default ] - The second array or range whose entries will be multiplied with corresponding entries in the first such array or range.
+    note - unlike the function, this sumproduct is more lenient about the shape of the arrays - they just need to have the same number of arguments
    */
-
   const sumproduct = (...args) => {
-
-    // as usual just flatten everything
-     console.log(args)
-    let items = args.map(a => flatten(a))
-   console.log(items)
-    const maxLength = items.reduce((p, c) => Math.max(p, c.length), -Infinity)
-    console.log(items, items.map(a => a.length))
-    // now blow them out to the same length if any are just 1
-    items = items.map(a => a.length === a ? a.fill(a[0]) : a)
-    if (!items.every(a => a.length === maxLength)) throw new Error('arrays not same length')
-
-    // each item should produce a numeric value and all the arrays should be the same length
-    return Array.from({ length: maxLength }).reduce((p, _, i) => p + items.reduce((s, t) => _handy.asNumber(t[i]) * s, 1), 0)
-
-
+    const items = _handy.normalizeLengths(args)
+    return Array.from({ length: items[0].length }).map((d, i) => items.reduce((p, c) => p * Number(c[i]), 1)).reduce((p, c) => p + c, 0)
   }
+
   /**
    * note this flattens all arrays, so can only deal with 1 dependent variable at once
    * also calculate b and verbose are not implemented
@@ -116,11 +105,34 @@ function _array() {
    */
   const linest = (known_data_y, known_data_x) => _soLeastSquaresFitLinear(flatten(known_data_y), flatten(known_data_x))
 
+  const mdeterm = (arr) => _soDeterminant(arr)
+  const mmult = (a, b) => _mmult(a, b)
 
   /**
    * helper functions below - some are from SO and acknowledged
    */
 
+  const _mmult = (a, b) => Array.from({ length: a.length }).map((ci, i) => {
+    ci = Array.from({ length: b.length }).fill(0)
+    ci.forEach((_, j) => {
+      for (let k = 0; k < b.length; k++) {
+        ci[j] += a[i][k] * b[k][j];
+      }
+    })
+    return ci
+  })
+
+
+
+  // https://stackoverflow.com/questions/44474864/compute-determinant-of-a-matrix
+  const _soDeterminant = m =>
+    m.length == 1 ?
+      m[0][0] :
+      m.length == 2 ?
+        m[0][0] * m[1][1] - m[0][1] * m[1][0] :
+        m[0].reduce((r, e, i) =>
+          r + Math.pow((-1), (i + 2)) * e * _soDeterminant(m.slice(1).map(c =>
+            c.filter((_, j) => i != j))), 0)
 
   // https://stackoverflow.com/questions/7437660/how-do-i-recreate-an-excel-formula-which-calls-trend-in-c
   function _soLeastSquaresFitLinear(known_y, known_x, offset_x = 0) {
@@ -195,7 +207,9 @@ function _array() {
     trend,
     logest,
     transpose,
-    sumproduct
+    sumproduct,
+    mdeterm,
+    mmult
   }
 }
 
