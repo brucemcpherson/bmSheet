@@ -8,6 +8,12 @@
         "userSymbol": "bmTemporal",
         "libraryId": "1o_qJw1fdgF4NgRnHrsB_Jsbu3gYe1fQnPze33V9jHLqBCXHmzZaBgmGH",
         "version": "3"
+      },
+      {
+        "userSymbol": "bmMathjs",
+        "libraryId": "1bIdFSI3cVg-f0s7qOgDmr8Gcwut_XqS3lb8kCxBzUowQ8-NvU607cMo-",
+        "version": "1",
+        "developmentMode": false
       }
     ]
   }
