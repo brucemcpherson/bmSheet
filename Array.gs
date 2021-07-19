@@ -9,7 +9,10 @@ function _array() {
   /**
    * =FLATTEN(range1, [range2, ?])
    */
-  const flatten = (...args) => _handy.flatten(args)
+  const flatten = (...args) => _handy.flatten(...args)
+ 
+  // we're putting it into a column so it needs decoration
+  const exportFlatten = (...args) => flatten(...args).map(f=>[f])
 
   /**
     * ARRAY_CONSTRAIN(input_range, num_rows, num_cols)
@@ -17,21 +20,17 @@ function _array() {
       num_rows - The number of rows the result should contain.
       num_cols - The number of columns the result should contain
     */
-  const array_constrain = (input_range, num_rows, num_cols) => _handy.forceArray(input_range).slice(0, num_rows).map(r => r.slice(0, num_cols))
+  const array_constrain = (input_range, num_rows, num_cols) =>
+    _handy.forceArray(input_range).slice(0, num_rows).map(r => r.slice(0, num_cols))
 
   /**
    * FREQUENCY
     Calculates the frequency distribution of a one-column array into specified classes.
-
-    Sample Usage
-    FREQUENCY(A2:A40,B2:B5)
-    Syntax
     FREQUENCY(data, classes)
     data - The array or range containing the values to be counted.
     classes - The array or range containing the set of classes.
     classes should be sorted for clarity, but FREQUENCY will sort the values specified internally if they are not and return correct results.
    */
-
   const frequency = (data, classes) => {
 
     // the extra one at the end for those that are too big
@@ -49,7 +48,8 @@ function _array() {
    * note this flattens all arrays, so can only deal with 1 dependent variable at once
    * GROWTH(known_data_y, [known_data_x], [new_data_x], [b])
    */
-  const growth = (known_y, known_x, new_x, use_const) => _soGrowth(flatten(known_y), flatten(known_x), flatten(new_x), use_const)
+  const growth = (known_y, known_x, new_x, use_const) =>
+    _soGrowth(flatten(known_y), flatten(known_x), flatten(new_x), use_const)
 
   /**
    * note this flattens all arrays, so can only deal with 1 dependent variable at once, and b argument is not implemented
@@ -96,7 +96,8 @@ function _array() {
    */
   const sumproduct = (...args) => {
     const items = _handy.normalizeLengths(args)
-    return Array.from({ length: items[0].length }).map((d, i) => items.reduce((p, c) => p * Number(c[i]), 1)).reduce((p, c) => p + c, 0)
+    return Array.from({ length: items[0].length }).map((d, i) =>
+      items.reduce((p, c) => p * Number(c[i]), 1)).reduce((p, c) => p + c, 0)
   }
 
   /**
@@ -104,7 +105,8 @@ function _array() {
    * also calculate b and verbose are not implemented
    * LINEST(known_data_y, [known_data_x], [calculate_b], [verbose])
    */
-  const linest = (known_data_y, known_data_x) => _soLeastSquaresFitLinear(flatten(known_data_y), flatten(known_data_x))
+  const linest = (known_data_y, known_data_x) =>
+    _soLeastSquaresFitLinear(flatten(known_data_y), flatten(known_data_x))
 
   /**
    * MDETERM
@@ -141,7 +143,7 @@ function _array() {
     const ca = a && a[0] && a[0].length
     const rb = b && b.length
     if (ca !== rb) throw new Error('the number of columns for matrix1 must equal the number of rows for matrix2')
-    return Mathjs.multiply (a, b)
+    return Mathjs.multiply(a, b)
   }
 
 
@@ -211,7 +213,7 @@ function _array() {
 
   return {
     array_constrain,
-    flatten,
+    flatten: exportFlatten,
     frequency,
     growth,
     linest,
