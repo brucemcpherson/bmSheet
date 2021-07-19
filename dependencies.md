@@ -1,5 +1,5 @@
 # Google Apps Script Project: bmSheet
-This repo (bmSheet) was automatically updated on 7/15/2021, 12:21:04 PM by GasGit
+This repo (bmSheet) was automatically updated on 7/19/2021, 12:28:22 PM by GasGit
 
 For more information on gasgit, see the [desktop liberation site](https://ramblings.mcpher.com/drive-sdk-and-github/migrategasgit/ "desktop liberation")
 
@@ -24,10 +24,12 @@ Exports| server_js
 *library*|*identifier*|*key*|*version*|*dev mode*|*source*|
 --- | --- | --- | --- | --- | --- 
 bmTemporal| bmTemporal|1o_qJw1fdgF4NgRnHrsB_Jsbu3gYe1fQnPze33V9jHLqBCXHmzZaBgmGH|3|no|[here](libraries/bmTemporal "library source")
+bmMathjs| bmMathjs|1bIdFSI3cVg-f0s7qOgDmr8Gcwut_XqS3lb8kCxBzUowQ8-NvU607cMo-|1|no|[here](libraries/bmMathjs "library source")
 ### All dependencies and sub dependencies
 *library*|*identifier*|*key*|*version*|*dev mode*|*source*|
 --- | --- | --- | --- | --- | --- 
 bmTemporal| bmTemporal|1o_qJw1fdgF4NgRnHrsB_Jsbu3gYe1fQnPze33V9jHLqBCXHmzZaBgmGH|3|no|[here](libraries/bmTemporal "library source")
+bmMathjs| bmMathjs|1bIdFSI3cVg-f0s7qOgDmr8Gcwut_XqS3lb8kCxBzUowQ8-NvU607cMo-|1|no|[here](libraries/bmMathjs "library source")
 ### Enabled Google Services
 no libraries discovered
 ### Scopes required
