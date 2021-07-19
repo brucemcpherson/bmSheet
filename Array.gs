@@ -5,6 +5,7 @@
  */
 function _array() {
 
+
   /**
    * =FLATTEN(range1, [range2, ?])
    */
@@ -105,34 +106,44 @@ function _array() {
    */
   const linest = (known_data_y, known_data_x) => _soLeastSquaresFitLinear(flatten(known_data_y), flatten(known_data_x))
 
-  const mdeterm = (arr) => _soDeterminant(arr)
-  const mmult = (a, b) => _mmult(a, b)
+  /**
+   * MDETERM
+   * Returns the matrix determinant of a square matrix specified as an array
+   * Syntax
+   * MDETERM(square_matrix)
+   * square_matrix - An array or range with an equal number of rows and columns representing a matrix whose determinant will be calculated.
+   */
+  const mdeterm = (arr) => {
+    if (!arr || !arr[0] || arr.length !== arr[0].length) throw new Error('matrix should be square')
+    return Mathjs.det(arr)
+  }
 
   /**
-   * helper functions below - some are from SO and acknowledged
+   * MINVERSE
+   * Returns the inverse  of a square matrix specified as an array
+   * Syntax
+   * MINVERSE (square_matrix)
+   * square_matrix - An array or range with an equal number of rows and columns
    */
+  const minverse = (arr) => {
+    if (!arr || !arr[0] || arr.length !== arr[0].length) throw new Error('matrix should be square')
+    return Mathjs.inv(arr)
+  }
 
-  const _mmult = (a, b) => Array.from({ length: a.length }).map((ci, i) => {
-    ci = Array.from({ length: b.length }).fill(0)
-    ci.forEach((_, j) => {
-      for (let k = 0; k < b.length; k++) {
-        ci[j] += a[i][k] * b[k][j];
-      }
-    })
-    return ci
-  })
+  /**
+   * MMULT
+   * Calculates the matrix product of two matrices specified as arrays or ranges.
+   * Syntax
+   * MMULT(matrix1, matrix2)
+   * As standard in matrix multiplication, the number of columns for matrix1 must equal the number of rows for matrix2
+   */
+  const mmult = (a, b) => {
+    const ca = a && a[0] && a[0].length
+    const rb = b && b.length
+    if (ca !== rb) throw new Error('the number of columns for matrix1 must equal the number of rows for matrix2')
+    return Mathjs.multiply (a, b)
+  }
 
-
-
-  // https://stackoverflow.com/questions/44474864/compute-determinant-of-a-matrix
-  const _soDeterminant = m =>
-    m.length == 1 ?
-      m[0][0] :
-      m.length == 2 ?
-        m[0][0] * m[1][1] - m[0][1] * m[1][0] :
-        m[0].reduce((r, e, i) =>
-          r + Math.pow((-1), (i + 2)) * e * _soDeterminant(m.slice(1).map(c =>
-            c.filter((_, j) => i != j))), 0)
 
   // https://stackoverflow.com/questions/7437660/how-do-i-recreate-an-excel-formula-which-calls-trend-in-c
   function _soLeastSquaresFitLinear(known_y, known_x, offset_x = 0) {
@@ -209,7 +220,8 @@ function _array() {
     transpose,
     sumproduct,
     mdeterm,
-    mmult
+    mmult,
+    minverse
   }
 }
 
