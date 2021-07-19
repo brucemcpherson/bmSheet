@@ -3,7 +3,7 @@ var _handy = (() => {
 
   const isUndefined = (a) => typeof a === typeof undefined
 
-  const forceArray =  (a) => Array.isArray(a) ? a : [a]
+  const forceArray = (a) => Array.isArray(a) ? a : [a]
 
   const flatten = (...args) => forceArray(args).map(f => forceArray(f).flat()).flat()
 
@@ -17,6 +17,8 @@ var _handy = (() => {
     if (!items.every(d => d.length === maxLength)) throw new Error("all arrays should be the same length or 1")
     return items
   }
+
+
 
   return {
     forceArray,
