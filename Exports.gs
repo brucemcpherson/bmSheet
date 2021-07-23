@@ -1,18 +1,21 @@
-// expose everything under a common namespace
-// the tz arg is needed if the sheet is in a different timezone than the script
-// if missing it'll use the script timezone
+
+
+// expose stuff from temporal in case its needed
+var { Temporal, helpers } = bmTemporal
+var { GasSql } = bmAlasql
+var { Fiddler} = bmFiddler
+
+// expose stuff from math js that might be useful
+var { math: Mathjs } = bmMathjs
+
 var functions = {
+  ..._database(),
   ..._date(),
   ..._array()
 }
 
-// expose stuff from temporal in case its needed
-var { Temporal, helpers } = bmTemporal
-// expose stuff from math js that might be useful
-var { math: Mathjs } = bmMathjs
-
 // the wrapper so these can be declared as custom functions
-var customFunctions = (name,  ...args) => functions[name](...args)
+var customFunctions = (name, ...args) => functions[name](...args)
 
 /**
  * to use these in custom functions eg..
