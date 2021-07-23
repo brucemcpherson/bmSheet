@@ -13,6 +13,17 @@
         "userSymbol": "bmMathjs",
         "libraryId": "1bIdFSI3cVg-f0s7qOgDmr8Gcwut_XqS3lb8kCxBzUowQ8-NvU607cMo-",
         "version": "1"
+      },
+      {
+        "userSymbol": "bmAlasql",
+        "libraryId": "1OcbRxA2lKJfR49RtAzl_5XN2_jnT6ByzJRKRihv8VXf1leGEGevlLzYf",
+        "version": "0",
+        "developmentMode": true
+      },
+      {
+        "userSymbol": "bmFiddler",
+        "libraryId": "13EWG4-lPrEf34itxQhAQ7b9JEbmCBfO8uE4Mhr99CHi3Pw65oxXtq-rU",
+        "version": "15"
       }
     ]
   }
