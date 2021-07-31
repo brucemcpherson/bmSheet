@@ -15,11 +15,18 @@ var _handy = (() => {
 
   const flatten = (...args) => forceArray(args).map(f => forceArray(f).flat()).flat()
 
-  const check2d = (a) => {
-    if (!Array.isArray(a) || !Array.isArray(a[0])) throw new Error('must be 2d array like [[x,x...],[y,y...],...]')
-    return a
+  const check2d = (a, force = false) => {
+    if (!Array.isArray(a) || !Array.isArray(a[0])) {
+      if (!force || !Array.isArray(a))throw new Error('must be 2d array like [[x,x...],[y,y...],...]')
+      return [a]
+    } else {
+      return a
+    }
   }
   const isEmpty = (a) => isUndefined(a) || a === ''
+
+  const numRows = (a) => check2d(a).length
+  const numCols = (a) => check2d(a)[0].length
 
   const normalizeLengths = (arr) => {
     // normalize the argument array dimensions
@@ -76,10 +83,10 @@ var _handy = (() => {
       return isEmpty(v) ? null : `${fieldName} ${getOperator(v)} ${typify(dropOperator(v), ob.type)}`
     }).filter(t => t)).filter(t => t.length)
   }
-  const dropTable = ({name}) => exec({sql: `drop table ${name}`}) 
+  const dropTable = ({ name }) => exec({ sql: `drop table ${name}` })
 
   const fCountA = (oVals) => oVals.filter(f => !isEmpty(f)).length
-  const fCount = (oVals) => oVals.filter(f =>  typeof f === 'number').length
+  const fCount = (oVals) => oVals.filter(f => typeof f === 'number').length
   const fAverage = (oVals) => Mathjs.mean(oVals)
   const fMax = (oVals) => Mathjs.max(oVals)
   const fMin = (oVals) => Mathjs.min(oVals)
@@ -89,6 +96,10 @@ var _handy = (() => {
   const fSum = (oVals) => Mathjs.sum(oVals)
   const fVar = (oVals) => Mathjs.variance(oVals)
   const fVarp = (oVals) => Mathjs.variance(oVals, 'uncorrected')
+
+  // need a stringifier to handle dates
+  const dStringify = (ob) => JSON.stringify(ob, (_, value) => value instanceof Date ? value.toUTCString() : value)
+  const transpose = (arr2d) => arr2d[0].map((_, col) => arr2d.map(row => row[col]));
 
   return {
     getFieldName,
@@ -122,7 +133,11 @@ var _handy = (() => {
     fStdevp,
     fSum,
     fVar,
-    fVarp
+    fVarp,
+    dStringify,
+    numRows,
+    numCols,
+    transpose
   }
 
 
