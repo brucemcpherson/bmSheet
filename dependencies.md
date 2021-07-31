@@ -1,5 +1,5 @@
 # Google Apps Script Project: bmSheet
-This repo (bmSheet) was automatically updated on 7/23/2021, 2:20:21 PM by GasGit
+This repo (bmSheet) was automatically updated on 7/31/2021, 3:41:42 PM by GasGit
 
 For more information on gasgit, see the [desktop liberation site](https://ramblings.mcpher.com/drive-sdk-and-github/migrategasgit/ "desktop liberation")
 
@@ -20,6 +20,7 @@ Array| server_js
 Handy| server_js
 Date| server_js
 Database| server_js
+Filter| server_js
 Exports| server_js
 ### Directly referenced libraries
 *library*|*identifier*|*key*|*version*|*dev mode*|*source*|
