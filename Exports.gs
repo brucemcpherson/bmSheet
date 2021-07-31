@@ -11,7 +11,8 @@ var { math: Mathjs } = bmMathjs
 var functions = {
   ..._database(),
   ..._date(),
-  ..._array()
+  ..._array(),
+  ..._filter()
 }
 
 // the wrapper so these can be declared as custom functions
@@ -35,3 +36,4 @@ const custom  = (name, ...args) =>  {
 }
 
 */
+
