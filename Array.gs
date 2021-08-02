@@ -86,7 +86,7 @@ function _array() {
   /**
    * TRANSPOSE(array_or_range)
    */
-  const transpose = (arr2d) => _handy.transpose (check2d(arr2d))
+  const transpose = (arr2d) => _handy.transpose (_handy.check2d(arr2d))
 
   /**
    * SUMPRODUCT(array1, [array2, ...])
