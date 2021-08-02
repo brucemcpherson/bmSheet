@@ -31,7 +31,6 @@ condition arguments must have exactly the same length as range.
     const conds = forceArray(cargs).map(f => check2d(f, true))
 
     if (!conds.every(c => {
-      console.log(c)
       return numRows(arr) === numRows(c) && numCols(c) === 1
     })) {
       throw new Error('number of rows in condition(s) dont match')
